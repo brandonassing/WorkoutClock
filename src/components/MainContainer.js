@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { View, Text } from 'react-native';
 
-class CryptoContainer extends Component {
+class MainContainer extends Component {
   render(){
     return (
       <View>
@@ -14,8 +14,8 @@ class CryptoContainer extends Component {
 
 function mapStateToProps(state){
   return{
-    crypto: state.crypto
+    mainState: state.mainState
   }
 }
 
-export default connect(mapStateToProps)(CryptoContainer)
+export default connect(mapStateToProps)(MainContainer)
