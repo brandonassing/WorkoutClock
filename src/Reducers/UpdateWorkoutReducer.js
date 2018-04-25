@@ -1,13 +1,13 @@
 import { UPDATE_WORKOUT, updateWorkoutRoutine } from '../Actions/ChangeWorkoutRoutine';
 const initialState = {
-  workouts: [{
+  workout: {
     timeSlots: [{
       seconds: 0,
       type: "",
       name: "",
       index: 0
     }]
-  }]
+  }
 };
 
 export const UpdateWorkoutReducer = (state = initialState, action) => {

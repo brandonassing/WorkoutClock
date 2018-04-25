@@ -13,12 +13,7 @@ const mapDispatchToProps = dispatch => {
 
 const mapStateToProps = state => {
   return {
-    timeSlots: [{
-      seconds: 0,
-      type: "",
-      name: "",
-      index: 0
-    }]
+    timeSlots: state.updateWorkout.workout.timeSlots
   };
 };
 
