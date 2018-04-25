@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { View, Text, TextInput, StyleSheet } from 'react-native';
+import FloatingLabelInput from './FloatingLabelInput';
 
 const styles = StyleSheet.create({
   container: {
@@ -23,8 +24,8 @@ class ExerciseField extends Component {
   constructor(props) {
       super(props);
       this.state = {
-        exerciseName: "Exercise 1",
-        seconds: "30"
+        exerciseName: '',
+        seconds: ''
       };
     }
 
@@ -35,16 +36,31 @@ class ExerciseField extends Component {
           style={[styles.inputField, styles.exerciseInput]}
           onChangeText={(text) => this.setState({text})}
           value={this.state.exerciseName}
+          placeholder="Exercise"
+          defaultValue="Exercise"
         />
         <TextInput
           style={[styles.inputField, styles.timeInput]}
           onChangeText={(text) => this.setState({text})}
           value={this.state.seconds}
           keyboardType = 'numeric'
+          placeholder="30"
+          defaultValue="30"
         />
         </View>
       );
     }
 }
-
+/*<FloatingLabelInput
+  style={styles.exerciseInput}
+  label="Exercise"
+  value={this.state.exerciseName}
+  onChangeText={(exerciseName) => this.setState({exerciseName})}
+/>
+<FloatingLabelInput
+  style={styles.timeInput}
+  label="Time"
+  value={this.state.seconds}
+  onChangeText={(seconds) => this.setState({seconds})}
+/>*/
 export default ExerciseField;
