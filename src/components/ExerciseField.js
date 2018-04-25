@@ -1,20 +1,47 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { View, Text, TextInput } from 'react-native';
+import { View, Text, TextInput, StyleSheet } from 'react-native';
+
+const styles = StyleSheet.create({
+  container: {
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "space-around"
+  },
+  inputField: {
+    height: 60
+  },
+  exerciseInput: {
+    flexGrow: 5
+  },
+  timeInput: {
+    flexGrow: 1
+  }
+});
 
 class ExerciseField extends Component {
   constructor(props) {
       super(props);
-      this.state = { text: 'Useless Placeholder' };
+      this.state = {
+        exerciseName: "Exercise 1",
+        seconds: "30"
+      };
     }
 
     render() {
       return (
+        <View style={styles.container}>
         <TextInput
-          style={{height: 40, borderColor: 'gray', borderWidth: 1}}
+          style={[styles.inputField, styles.exerciseInput]}
           onChangeText={(text) => this.setState({text})}
-          value={this.state.text}
+          value={this.state.exerciseName}
         />
+        <TextInput
+          style={[styles.inputField, styles.timeInput]}
+          onChangeText={(text) => this.setState({text})}
+          value={this.state.seconds}
+        />
+        </View>
       );
     }
 }
