@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux';
-import MainReducer from './MainReducer';
+import { UpdateWorkoutReducer } from './UpdateWorkoutReducer';
 
 export default combineReducers({
-  main: MainReducer
+  updateWorkout: UpdateWorkoutReducer
 });

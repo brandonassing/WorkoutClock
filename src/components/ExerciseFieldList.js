@@ -3,7 +3,24 @@ import { connect } from 'react-redux';
 import { View, Text, StyleSheet } from 'react-native';
 import ExerciseField from './ExerciseField';
 import { Button, ButtonGroup } from 'react-native-elements';
+import { updateWorkoutReducer } from '../Actions/ChangeWorkoutRoutine';
 
+const mapDispatchToProps = dispatch => {
+  return {
+    updateWorkoutRoutine: workoutData => dispatch(updateWorkoutRoutine(workoutData))
+  }
+}
+
+const mapStateToProps = state => {
+  return {
+    timeSlots: [{
+      seconds: 0,
+      type: "",
+      name: "",
+      index: 0
+    }]
+  };
+};
 
 const styles = StyleSheet.create({
   startButton: {
@@ -15,13 +32,13 @@ class ExerciseFieldList extends Component {
   constructor () {
     super()
     this.state = {
-      'selectedIndex': 0
+      selectedIndex: 0
     }
     this.updateIndex = this.updateIndex.bind(this)
   }
 
   updateIndex(selectedIndex){
-    this.setState({'selectedIndex': selectedIndex});
+    this.setState({selectedIndex: selectedIndex});
     if (selectedIndex == 0){
       this.addExercise();
     } else {
@@ -64,10 +81,4 @@ class ExerciseFieldList extends Component {
   }
 }
 
-function mapStateToProps(state){
-  return{
-    mainState: state.mainState
-  }
-}
-
-export default connect(mapStateToProps)(ExerciseFieldList)
+export default connect(mapStateToProps, mapDispatchToProps)(ExerciseFieldList)
