@@ -40,6 +40,7 @@ class ExerciseField extends Component {
           style={[styles.inputField, styles.timeInput]}
           onChangeText={(text) => this.setState({text})}
           value={this.state.seconds}
+          keyboardType = 'numeric'
         />
         </View>
       );
