@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { View, Text } from 'react-native';
+import ExerciseField from './ExerciseField';
 
-class MainContainer extends Component {
+class ExerciseFieldList extends Component {
+
   render(){
     return (
       <View>
-        <Text>My Container</Text>
+        <ExerciseField />
       </View>
     )
   }
@@ -18,4 +20,4 @@ function mapStateToProps(state){
   }
 }
 
-export default connect(mapStateToProps)(MainContainer)
+export default connect(mapStateToProps)(ExerciseFieldList)

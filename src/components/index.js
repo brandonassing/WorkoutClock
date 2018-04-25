@@ -1,4 +1,4 @@
 import Header from './Header.js';
-import MainContainer from './MainContainer';
+import ExerciseFieldList from './ExerciseFieldList';
 
-export { Header, MainContainer };
+export { Header, ExerciseFieldList };
