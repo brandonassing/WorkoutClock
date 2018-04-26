@@ -2,6 +2,13 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { View, Text, TextInput, StyleSheet } from 'react-native';
 import FloatingLabelInput from './FloatingLabelInput';
+import { updateWorkoutRoutine } from '../Actions/ChangeWorkoutRoutine';
+
+const mapDispatchToProps = dispatch => {
+  return {
+    updateWorkoutRoutine: workoutData => dispatch(updateWorkoutRoutine(workoutData))
+  }
+}
 
 const styles = StyleSheet.create({
   container: {
@@ -24,8 +31,8 @@ class ExerciseField extends Component {
   constructor(props) {
       super(props);
       this.state = {
-        exerciseName: '',
-        seconds: ''
+        name: this.props.name,
+        seconds: this.props.seconds
       };
     }
 
@@ -34,18 +41,15 @@ class ExerciseField extends Component {
         <View style={styles.container}>
         <TextInput
           style={[styles.inputField, styles.exerciseInput]}
-          onChangeText={(text) => this.setState({text})}
-          value={this.state.exerciseName}
-          placeholder="Exercise"
-          defaultValue="Exercise"
+          onChangeText={(name) => this.setState({name: name})}
+          value={this.state.name}
+          editable={this.props.type == "Exercise"}
         />
         <TextInput
           style={[styles.inputField, styles.timeInput]}
-          onChangeText={(text) => this.setState({text})}
+          onChangeText={(seconds) => this.setState({seconds: seconds})}
           value={this.state.seconds}
           keyboardType = 'numeric'
-          placeholder="30"
-          defaultValue="30"
         />
         </View>
       );
@@ -63,4 +67,4 @@ class ExerciseField extends Component {
   value={this.state.seconds}
   onChangeText={(seconds) => this.setState({seconds})}
 />*/
-export default ExerciseField;
+export default connect(null, mapDispatchToProps)(ExerciseField)

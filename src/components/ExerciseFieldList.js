@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { View, Text, StyleSheet } from 'react-native';
+import { ScrollView, View, Text, StyleSheet } from 'react-native';
 import ExerciseField from './ExerciseField';
 import { Button, ButtonGroup } from 'react-native-elements';
 import { updateWorkoutRoutine } from '../Actions/ChangeWorkoutRoutine';
@@ -31,7 +31,6 @@ class ExerciseFieldList extends Component {
     }
     this.updateIndex = this.updateIndex.bind(this)
     this.exerciseCount = 0;
-    this.totalCount = 0;
   }
 
   updateIndex(selectedIndex){
@@ -41,7 +40,6 @@ class ExerciseFieldList extends Component {
     } else {
       this.addRest();
     }
-    this.totalCount++;
   }
 
   addExercise(){
@@ -49,8 +47,7 @@ class ExerciseFieldList extends Component {
     this.props.updateWorkoutRoutine({
       seconds: 30,
       type: "Exercise",
-      name: "Exercise " + this.exerciseCount.toString(),
-      index: this.totalCount
+      name: "Exercise " + this.exerciseCount.toString()
     });
   }
 
@@ -58,8 +55,7 @@ class ExerciseFieldList extends Component {
     this.props.updateWorkoutRoutine({
       seconds: 60,
       type: "Rest",
-      name: "Rest",
-      index: this.totalCount
+      name: "Rest"
     });
   }
 
@@ -67,12 +63,23 @@ class ExerciseFieldList extends Component {
 
   }
 
+  renderExercises(){
+    return this.props.timeSlots.map((entry, index) =>
+      <ExerciseField
+        name={entry.name}
+        seconds={entry.seconds.toString()}
+        type={entry.type}
+        key={index}
+      />
+    );
+  }
+
   render(){
     const buttons = ['Add exercise', 'Add rest']
     const { selectedIndex } = this.state.selectedIndex;
     return (
-      <View>
-        <ExerciseField />
+      <ScrollView>
+        {this.renderExercises()}
         <ButtonGroup
           onPress={this.updateIndex}
           selectedIndex={selectedIndex}
@@ -85,7 +92,7 @@ class ExerciseFieldList extends Component {
           title="Start"
           color="white"
         />
-      </View>
+      </ScrollView>
     )
   }
 }
