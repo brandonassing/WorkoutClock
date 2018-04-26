@@ -30,18 +30,18 @@ class ExerciseFieldList extends Component {
       selectedIndex: 0
     }
     this.updateIndex = this.updateIndex.bind(this)
-    var exerciseCount = 0;
-    var totalCount = 0;
+    this.exerciseCount = 0;
+    this.totalCount = 0;
   }
 
   updateIndex(selectedIndex){
-    this.totalCount++;
     this.setState({selectedIndex: selectedIndex});
     if (selectedIndex == 0){
       this.addExercise();
     } else {
       this.addRest();
     }
+    this.totalCount++;
   }
 
   addExercise(){
@@ -49,10 +49,9 @@ class ExerciseFieldList extends Component {
     this.props.updateWorkoutRoutine({
       seconds: 30,
       type: "Exercise",
-      name: "Exercise",
-      index: 0
+      name: "Exercise " + this.exerciseCount.toString(),
+      index: this.totalCount
     });
-    console.log("add exercise");
   }
 
   addRest(){
@@ -60,9 +59,8 @@ class ExerciseFieldList extends Component {
       seconds: 60,
       type: "Rest",
       name: "Rest",
-      index: 0
+      index: this.totalCount
     });
-    console.log("add rest");
   }
 
   startTimer(){
