@@ -37,10 +37,10 @@ class ExerciseField extends Component {
     }
     componentDidUpdate() {
       this.props.editTimeslot({
-        seconds: this.state.seconds,
+        seconds: parseInt(this.state.seconds),
         type: this.props.type,
         name: this.state.name,
-        index: this.props.index
+        index: parseInt(this.props.index)
       });
     }
     render() {

@@ -32,12 +32,18 @@ class WorkoutHeader extends Component {
       super(props);
       this.state = {
         workoutName: "Workout 1",
-        sets: 1
+        sets: "1"
       };
-      this.props.editWorkout(this.state);
+      this.props.editWorkout({
+        workoutName: this.state.workoutName,
+        sets: parseInt(this.state.sets)
+      });
     }
     componentDidUpdate() {
-      this.props.editWorkout(this.state);
+      this.props.editWorkout({
+        workoutName: this.state.workoutName,
+        sets: parseInt(this.state.sets)
+      });
     }
     render() {
       return (
