@@ -34,6 +34,7 @@ class WorkoutHeader extends Component {
         workoutName: "Workout 1",
         sets: 1
       };
+      this.props.editWorkout(this.state);
     }
     componentDidUpdate() {
       this.props.editWorkout(this.state);
