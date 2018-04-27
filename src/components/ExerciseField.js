@@ -2,11 +2,11 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { View, Text, TextInput, StyleSheet } from 'react-native';
 import FloatingLabelInput from './FloatingLabelInput';
-import { updateWorkoutRoutine } from '../Actions/ChangeWorkoutRoutine';
+import { editTimeslot } from '../Actions/ChangeWorkoutRoutine';
 
 const mapDispatchToProps = dispatch => {
   return {
-    updateWorkoutRoutine: workoutData => dispatch(updateWorkoutRoutine(workoutData))
+    editTimeslot: workoutData => dispatch(editTimeslot(workoutData))
   }
 }
 
@@ -35,7 +35,14 @@ class ExerciseField extends Component {
         seconds: this.props.seconds
       };
     }
-
+    componentDidUpdate() {
+      this.props.editTimeslot({
+        seconds: this.state.seconds,
+        type: this.props.type,
+        name: this.state.name,
+        index: this.props.index
+      });
+    }
     render() {
       return (
         <View style={styles.container}>

@@ -1,21 +1,32 @@
-import { UPDATE_WORKOUT, updateWorkoutRoutine } from '../Actions/ChangeWorkoutRoutine';
+import { ADD_TIMESLOT, addTimeslot, EDIT_TIMESLOT, editTimeslot } from '../Actions/ChangeWorkoutRoutine';
 const initialState = {
   workout: {
-    timeSlots: []
+    timeslots: []
   }
 };
 
 export const UpdateWorkoutReducer = (state = initialState, action) => {
-  console.log(JSON.stringify(action.data));
   switch(action.type) {
-    case UPDATE_WORKOUT:
-    //pretty sure the states.timeSlots line in the return won't work bc it will insert the [] array into the new timeSlots instead of merging the 2
+    case ADD_TIMESLOT:
       return {
         ...state,
         workout: {
-          timeSlots: [...state.workout.timeSlots, action.data]
+          timeslots: [...state.workout.timeslots, action.data]
         }
-      }
+      };
+    case EDIT_TIMESLOT:
+      const updatedItems = state.workout.timeslots.map(item => {
+        if(item.index === action.data.index){
+          return { ...item, ...action.data }
+        }
+        return item
+      });
+      return {
+        ...state,
+        workout: {
+          timeslots: updatedItems
+        }
+      };
     default:
       return state;
   }

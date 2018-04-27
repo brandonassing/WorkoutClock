@@ -3,17 +3,17 @@ import { connect } from 'react-redux';
 import { ScrollView, View, Text, StyleSheet } from 'react-native';
 import ExerciseField from './ExerciseField';
 import { Button, ButtonGroup } from 'react-native-elements';
-import { updateWorkoutRoutine } from '../Actions/ChangeWorkoutRoutine';
+import { addTimeslot } from '../Actions/ChangeWorkoutRoutine';
 
 const mapDispatchToProps = dispatch => {
   return {
-    updateWorkoutRoutine: workoutData => dispatch(updateWorkoutRoutine(workoutData))
+    addTimeslot: workoutData => dispatch(addTimeslot(workoutData))
   }
 }
 
 const mapStateToProps = state => {
   return {
-    timeSlots: state.updateWorkout.workout.timeSlots
+    timeslots: state.updateWorkout.workout.timeslots
   };
 };
 
@@ -31,9 +31,11 @@ class ExerciseFieldList extends Component {
     }
     this.updateIndex = this.updateIndex.bind(this)
     this.exerciseCount = 0;
+    this.totalCount = 0;
   }
 
   updateIndex(selectedIndex){
+    this.totalCount++;
     this.setState({selectedIndex: selectedIndex});
     if (selectedIndex == 0){
       this.addExercise();
@@ -44,18 +46,20 @@ class ExerciseFieldList extends Component {
 
   addExercise(){
     this.exerciseCount++;
-    this.props.updateWorkoutRoutine({
+    this.props.addTimeslot({
       seconds: 30,
       type: "Exercise",
-      name: "Exercise " + this.exerciseCount.toString()
+      name: "Exercise " + this.exerciseCount.toString(),
+      index: (this.totalCount - 1)
     });
   }
 
   addRest(){
-    this.props.updateWorkoutRoutine({
+    this.props.addTimeslot({
       seconds: 60,
       type: "Rest",
-      name: "Rest"
+      name: "Rest",
+      index: (this.totalCount - 1)
     });
   }
 
@@ -64,12 +68,14 @@ class ExerciseFieldList extends Component {
   }
 
   renderExercises(){
-    return this.props.timeSlots.map((entry, index) =>
+    //TODO find out what index/key does and if it's needed
+    return this.props.timeslots.map((entry, index) =>
       <ExerciseField
         name={entry.name}
         seconds={entry.seconds.toString()}
         type={entry.type}
         key={index}
+        index={entry.index}
       />
     );
   }
