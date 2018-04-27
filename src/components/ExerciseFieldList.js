@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { ScrollView, View, Text, StyleSheet } from 'react-native';
 import ExerciseField from './ExerciseField';
+import WorkoutHeader from './WorkoutHeader';
 import { Button, ButtonGroup } from 'react-native-elements';
 import { addTimeslot } from '../Actions/ChangeWorkoutRoutine';
 
@@ -85,6 +86,7 @@ class ExerciseFieldList extends Component {
     const { selectedIndex } = this.state.selectedIndex;
     return (
       <ScrollView>
+        <WorkoutHeader />
         {this.renderExercises()}
         <ButtonGroup
           onPress={this.updateIndex}

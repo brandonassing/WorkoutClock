@@ -12,7 +12,7 @@ export default class FloatingLabelInput extends Component {
     isFocused: false,
   };
 
-  componentWillMount() {
+  UNSAFE_componentWillMount() {
     this._animatedIsFocused = new Animated.Value(this.props.value === '' ? 0 : 1);
   }
 
