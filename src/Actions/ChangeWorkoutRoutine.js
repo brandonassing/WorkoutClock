@@ -1,6 +1,8 @@
 export const EDIT_WORKOUT_INFO = "EDIT_WORKOUT_INFO";
 export const ADD_TIMESLOT = "ADD_TIMESLOT";
 export const EDIT_TIMESLOT = "EDIT_TIMESLOT";
+export const DELETE_TIMESLOT = "DELETE_TIMESLOT";
+//TODO
 export const MOVE_TIMESLOT = "MOVE_TIMESLOT";
 
 export const editWorkout = workoutInfo => ({
@@ -15,6 +17,12 @@ export const editTimeslot = workoutData => ({
   type: EDIT_TIMESLOT,
   data: workoutData
 });
+export const deleteTimeslot = deleteIndex => ({
+  type: DELETE_TIMESLOT,
+  data: deleteIndex
+});
+
+//TODO
 export const moveTimeslot = indexes => ({
   type: MOVE_TIMESLOT,
   data: indexes

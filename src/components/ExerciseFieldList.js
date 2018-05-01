@@ -3,12 +3,13 @@ import { connect } from 'react-redux';
 import { ScrollView, View, Text, StyleSheet } from 'react-native';
 import ExerciseField from './ExerciseField';
 import WorkoutHeader from './WorkoutHeader';
-import { Button, ButtonGroup } from 'react-native-elements';
-import { addTimeslot } from '../Actions/ChangeWorkoutRoutine';
+import { Button, ButtonGroup, Icon } from 'react-native-elements';
+import { addTimeslot, deleteTimeslot } from '../Actions/ChangeWorkoutRoutine';
 
 const mapDispatchToProps = dispatch => {
   return {
-    addTimeslot: workoutData => dispatch(addTimeslot(workoutData))
+    addTimeslot: workoutData => dispatch(addTimeslot(workoutData)),
+    deleteTimeslot: deleteIndex => dispatch(deleteTimeslot(deleteIndex))
   }
 }
 
@@ -33,6 +34,7 @@ class ExerciseFieldList extends Component {
     this.updateIndex = this.updateIndex.bind(this)
     this.exerciseCount = 0;
     this.totalCount = 0;
+    this.startTimer = this.startTimer.bind(this);
   }
 
   updateIndex(selectedIndex){
@@ -51,7 +53,7 @@ class ExerciseFieldList extends Component {
       seconds: 30,
       type: "Exercise",
       name: "Exercise " + this.exerciseCount.toString(),
-      index: (this.totalCount - 1)
+      id: "_" + Math.random().toString(36).substr(2, 9)
     });
   }
 
@@ -60,28 +62,31 @@ class ExerciseFieldList extends Component {
       seconds: 60,
       type: "Rest",
       name: "Rest",
-      index: (this.totalCount - 1)
+      id: "_" + Math.random().toString(36).substr(2, 9)
     });
   }
 
   startTimer(){
-
+    //seems to delete the proper item in store, but the last item on view
+    this.totalCount--;
+    this.props.deleteTimeslot(1);
   }
 
   renderExercises(){
-    //TODO find out what index/key does and if it's needed
-    return this.props.timeslots.map((entry, index) =>
-      <ExerciseField
-        name={entry.name}
-        seconds={entry.seconds.toString()}
-        type={entry.type}
-        key={index}
-        index={entry.index}
-      />
+    console.log("render exercise field");
+    return this.props.timeslots.map((item, key) =>
+        <ExerciseField
+          name={item.name}
+          seconds={item.seconds.toString()}
+          type={item.type}
+          id={item.id}
+          key={key}
+        />
     );
   }
 
   render(){
+    console.log('main render');
     const buttons = ['Add exercise', 'Add rest']
     const { selectedIndex } = this.state.selectedIndex;
     return (

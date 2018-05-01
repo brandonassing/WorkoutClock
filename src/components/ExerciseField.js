@@ -30,34 +30,44 @@ const styles = StyleSheet.create({
 class ExerciseField extends Component {
   constructor(props) {
       super(props);
-      this.state = {
-        name: this.props.name,
-        seconds: this.props.seconds
-      };
+      this.updateInfo = this.updateInfo.bind(this);
     }
-    componentDidUpdate() {
-      this.props.editTimeslot({
-        seconds: parseInt(this.state.seconds),
-        type: this.props.type,
-        name: this.state.name,
-        index: parseInt(this.props.index)
-      });
+
+    updateInfo(value, type){
+      if (type=="name") {
+        this.props.editTimeslot({
+          seconds: this.props.seconds,
+          type: this.props.type,
+          name: value,
+          id: this.props.id
+        });
+      }
+      else if (type=="seconds") {
+        this.props.editTimeslot({
+          seconds: parseInt(value),
+          type: this.props.type,
+          name: this.props.name,
+          id: this.props.id
+        });
+      }
     }
+    
     render() {
+      console.log("render field");
       return (
         <View style={styles.container}>
-        <TextInput
-          style={[styles.inputField, styles.exerciseInput]}
-          onChangeText={(name) => this.setState({name: name})}
-          value={this.state.name}
-          editable={this.props.type == "Exercise"}
-        />
-        <TextInput
-          style={[styles.inputField, styles.timeInput]}
-          onChangeText={(seconds) => this.setState({seconds: seconds})}
-          value={this.state.seconds}
-          keyboardType = 'numeric'
-        />
+          <TextInput
+            style={[styles.inputField, styles.exerciseInput]}
+            onChangeText={(name) => this.updateInfo(name, "name")}
+            value={this.props.name}
+            editable={this.props.type == "Exercise"}
+          />
+          <TextInput
+            style={[styles.inputField, styles.timeInput]}
+            onChangeText={(seconds) => this.updateInfo(seconds, "seconds")}
+            value={this.props.seconds}
+            keyboardType = 'numeric'
+          />
         </View>
       );
     }
