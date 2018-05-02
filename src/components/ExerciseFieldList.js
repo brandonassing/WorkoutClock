@@ -33,12 +33,10 @@ class ExerciseFieldList extends Component {
     }
     this.updateIndex = this.updateIndex.bind(this)
     this.exerciseCount = 0;
-    this.totalCount = 0;
     this.startTimer = this.startTimer.bind(this);
   }
 
   updateIndex(selectedIndex){
-    this.totalCount++;
     this.setState({selectedIndex: selectedIndex});
     if (selectedIndex == 0){
       this.addExercise();
