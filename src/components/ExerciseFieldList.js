@@ -67,7 +67,6 @@ class ExerciseFieldList extends Component {
   }
 
   startTimer(){
-    //seems to delete the proper item in store, but the last item on view
     this.totalCount--;
     this.props.deleteTimeslot(1);
   }

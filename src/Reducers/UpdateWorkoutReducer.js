@@ -26,13 +26,14 @@ export const UpdateWorkoutReducer = (state = initialState, action) => {
         }
       };
     case DELETE_TIMESLOT:
+        let deleteIndex = this.state.workout.timeslots.map(function(e) { return e.id; }).indexOf(action.data);
         return {
           ...state,
           workout: {
             ...state.workout,
             timeslots: [
-              ...state.workout.timeslots.slice(0, action.data),
-              ...state.workout.timeslots.slice(action.data + 1)
+              ...state.workout.timeslots.slice(0, deleteIndex),
+              ...state.workout.timeslots.slice(deleteIndex + 1)
             ]
           }
         };
