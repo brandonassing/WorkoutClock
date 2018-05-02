@@ -2,11 +2,13 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { View, Text, TextInput, StyleSheet } from 'react-native';
 import FloatingLabelInput from './FloatingLabelInput';
-import { editTimeslot } from '../Actions/ChangeWorkoutRoutine';
+import { editTimeslot, deleteTimeslot } from '../Actions/ChangeWorkoutRoutine';
+import { Button, ButtonGroup, Icon } from 'react-native-elements';
 
 const mapDispatchToProps = dispatch => {
   return {
-    editTimeslot: workoutData => dispatch(editTimeslot(workoutData))
+    editTimeslot: workoutData => dispatch(editTimeslot(workoutData)),
+    deleteTimeslot: id => dispatch(deleteTimeslot(id))
   }
 }
 
@@ -24,6 +26,9 @@ const styles = StyleSheet.create({
   },
   timeInput: {
     flexGrow: 1
+  },
+  deleteButton: {
+    flexGrow: 1
   }
 });
 
@@ -31,6 +36,7 @@ class ExerciseField extends Component {
   constructor(props) {
       super(props);
       this.updateInfo = this.updateInfo.bind(this);
+      this.deleteTimeslot = this.deleteTimeslot.bind(this);
     }
 
     updateInfo(value, type){
@@ -51,7 +57,11 @@ class ExerciseField extends Component {
         });
       }
     }
-    
+
+    deleteTimeslot(){
+      this.props.deleteTimeslot(this.props.id);
+    }
+
     render() {
       console.log("render field");
       return (
@@ -67,6 +77,16 @@ class ExerciseField extends Component {
             onChangeText={(seconds) => this.updateInfo(seconds, "seconds")}
             value={this.props.seconds}
             keyboardType = 'numeric'
+          />
+          <Button
+            icon={
+              <Icon
+                name='arrow-right'
+                size={15}
+                color='black'
+              />
+            }
+            onPress={this.deleteTimeslot}
           />
         </View>
       );

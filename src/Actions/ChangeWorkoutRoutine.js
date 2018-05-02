@@ -17,9 +17,9 @@ export const editTimeslot = workoutData => ({
   type: EDIT_TIMESLOT,
   data: workoutData
 });
-export const deleteTimeslot = deleteIndex => ({
+export const deleteTimeslot = deleteId => ({
   type: DELETE_TIMESLOT,
-  data: deleteIndex
+  data: deleteId
 });
 
 //TODO

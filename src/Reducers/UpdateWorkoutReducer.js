@@ -32,11 +32,11 @@ export const UpdateWorkoutReducer = (state = initialState, action) => {
         }
       };
     case DELETE_TIMESLOT:
+      let deleteIndex = state.workout.timeslots.map(function(e) { return e.id; }).indexOf(action.data);
       let newCountDelete = state.workout.exerciseCount;
-      if (action.data.type=="Exercise"){
+      if (state.workout.timeslots[deleteIndex].type=="Exercise"){
         newCountDelete--;
       }
-      let deleteIndex = this.state.workout.timeslots.map(function(e) { return e.id; }).indexOf(action.data);
       return {
         ...state,
         workout: {
