@@ -65,8 +65,7 @@ class ExerciseFieldList extends Component {
   }
 
   startTimer(){
-    this.totalCount--;
-    this.props.deleteTimeslot(1);
+    
   }
 
   renderExercises(){
