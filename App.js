@@ -12,7 +12,7 @@ class ExerciseScreen extends React.Component {
       <Provider store={Store}>
         <View>
           <Header />
-          <ExerciseFieldList />
+          <ExerciseFieldList navigation={this.props.navigation}/>
         </View>
       </Provider>
     );
@@ -26,7 +26,7 @@ class TimerScreen extends React.Component {
         <View>
           <Header />
           <Text>
-            Hello World
+            Timer Screen
           </Text>
         </View>
       </Provider>
