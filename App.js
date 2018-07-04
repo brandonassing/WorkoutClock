@@ -1,6 +1,6 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-import { Header, ExerciseFieldList } from './src/components'
+import { Header, ExerciseFieldList, Timer } from './src/components'
 import { Provider } from 'react-redux';
 import Store from './src/Store';
 
@@ -14,7 +14,7 @@ class ExerciseScreen extends React.Component {
     return (
       <Provider store={Store}>
         <View>
-          <ExerciseFieldList navigation={this.props.navigation}/>
+          <ExerciseFieldList navigation={this.props.navigation} />
         </View>
       </Provider>
     );
@@ -31,9 +31,7 @@ class TimerScreen extends React.Component {
     return (
       <Provider store={Store}>
         <View>
-          <Text>
-            Timer Screen
-          </Text>
+          <Timer navigation={this.props.navigation} />
         </View>
       </Provider>
     );
