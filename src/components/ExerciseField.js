@@ -79,13 +79,11 @@ class ExerciseField extends Component {
             keyboardType = 'numeric'
           />
           <Button
-            icon={
-              <Icon
-                name='arrow-right'
-                size={15}
-                color='black'
-              />
-            }
+            icon={{
+                name: 'close',
+                size: 15,
+                color: 'black'
+            }}
             onPress={this.deleteTimeslot}
           />
         </View>
