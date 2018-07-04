@@ -1,4 +1,4 @@
-import { ADD_TIMESLOT, addTimeslot, EDIT_TIMESLOT, editTimeslot, MOVE_TIMESLOT, moveTimeslot, EDIT_WORKOUT_INFO, editWorkout, DELETE_TIMESLOT, deleteTimeslot } from '../Actions/ChangeWorkoutRoutine';
+import { ADD_TIMESLOT, EDIT_TIMESLOT, MOVE_TIMESLOT, EDIT_WORKOUT_INFO, DELETE_TIMESLOT } from '../Actions/ChangeWorkoutRoutine';
 const initialState = {
   workout: {
     workoutName: "",

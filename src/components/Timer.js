@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { View, Text, StyleSheet } from 'react-native';
-import { tick } from '../Actions/CountTime';
+import { tick, stopTimer } from '../Actions/CountTime';
 
 const mapStateToProps = state => {
   return {
@@ -14,6 +14,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     tick: () => dispatch(tick()),
+    stopTimer: (timer) => dispatch(stopTimer(timer))
   };
 };
 
@@ -33,7 +34,7 @@ class Timer extends Component {
   }
 
   componentWillUnmount() {
-    clearInterval(this.state.timer);
+    this.props.stopTimer(this.state.timer);
   }
 
   tick() {

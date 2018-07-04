@@ -15,8 +15,7 @@ export const tick = () => ({
   type: TIMER_TICK
 });
 
-/*const stop = () => {
+export const stopTimer = (timer) => {
   clearInterval(timer);
   return { type: TIMER_STOP };
-}
-*/
+};
