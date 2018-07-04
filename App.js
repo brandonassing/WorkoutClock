@@ -4,7 +4,9 @@ import { Header, ExerciseFieldList } from './src/components'
 import { Provider } from 'react-redux';
 import Store from './src/Store';
 
-export default class App extends React.Component {
+import { createStackNavigator } from 'react-navigation';
+
+class ExerciseScreen extends React.Component {
   render() {
     return (
       <Provider store={Store}>
@@ -14,5 +16,40 @@ export default class App extends React.Component {
         </View>
       </Provider>
     );
+  }
+}
+
+class TimerScreen extends React.Component {
+  render() {
+    return (
+      <Provider store={Store}>
+        <View>
+          <Header />
+          <Text>
+            Hello World
+          </Text>
+        </View>
+      </Provider>
+    );
+  }
+}
+
+const RootStack = createStackNavigator(
+  {
+    Exercise: {
+      screen: ExerciseScreen
+    },
+    Timer: {
+      screen: TimerScreen
+    }
+  },
+  {
+    initialRouteName: "Exercise"
+  }
+);
+
+export default class App extends React.Component {
+  render() {
+    return <RootStack />;
   }
 }
