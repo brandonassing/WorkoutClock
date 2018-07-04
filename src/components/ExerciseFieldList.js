@@ -101,7 +101,7 @@ class ExerciseFieldList extends Component {
           onPress={this.startTimer}
           title="Start"
           color="white"
-          onPress={() => this.props.navigation.navigate('Timer')}
+          onPress={() => this.props.navigation.navigate('Timer', { title: "Timer" })}
         />
       </ScrollView>
     )

@@ -7,11 +7,13 @@ import Store from './src/Store';
 import { createStackNavigator } from 'react-navigation';
 
 class ExerciseScreen extends React.Component {
+  static navigationOptions = {
+    title: "Exercise List"
+  };
   render() {
     return (
       <Provider store={Store}>
         <View>
-          <Header />
           <ExerciseFieldList navigation={this.props.navigation}/>
         </View>
       </Provider>
@@ -20,11 +22,15 @@ class ExerciseScreen extends React.Component {
 }
 
 class TimerScreen extends React.Component {
+  static navigationOptions = ({ navigation }) => {
+    return {
+      title: navigation.getParam('title', "Page title")
+    };
+  };
   render() {
     return (
       <Provider store={Store}>
         <View>
-          <Header />
           <Text>
             Timer Screen
           </Text>
@@ -44,7 +50,16 @@ const RootStack = createStackNavigator(
     }
   },
   {
-    initialRouteName: "Exercise"
+    initialRouteName: "Exercise",
+    navigationOptions: {
+      headerStyle: {
+        backgroundColor: '#fe6100'
+      },
+      headerTintColor: "#FFFFFF",
+      headerTitleStyle: {
+        fontWeight: 'bold'
+      }
+    }
   }
 );
 
