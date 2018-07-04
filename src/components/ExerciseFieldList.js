@@ -65,7 +65,7 @@ class ExerciseFieldList extends Component {
   }
 
   startTimer(){
-    
+
   }
 
   renderExercises(){
@@ -96,6 +96,7 @@ class ExerciseFieldList extends Component {
           containerStyle={{height: 50}}
         />
         <Button
+          disabled={this.props.timeslots === undefined || this.props.timeslots.length === 0}
           buttonStyle={[styles.startButton]}
           onPress={this.startTimer}
           title="Start"
