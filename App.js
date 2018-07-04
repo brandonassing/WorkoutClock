@@ -1,6 +1,6 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-import { Header, ExerciseFieldList, Timer } from './src/components'
+import { Header, ExerciseFieldList, Timer, WorkoutInfo } from './src/components'
 import { Provider } from 'react-redux';
 import Store from './src/Store';
 
@@ -31,7 +31,8 @@ class TimerScreen extends React.Component {
     return (
       <Provider store={Store}>
         <View>
-          <Timer navigation={this.props.navigation} />
+          <Timer />
+          <WorkoutInfo />
         </View>
       </Provider>
     );

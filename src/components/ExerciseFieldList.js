@@ -10,8 +10,8 @@ const mapDispatchToProps = dispatch => {
   return {
     addTimeslot: workoutData => dispatch(addTimeslot(workoutData)),
     deleteTimeslot: deleteIndex => dispatch(deleteTimeslot(deleteIndex))
-  }
-}
+  };
+};
 
 const mapStateToProps = state => {
   return {
@@ -26,12 +26,12 @@ const styles = StyleSheet.create({
 });
 
 class ExerciseFieldList extends Component {
-  constructor () {
-    super()
+  constructor (props) {
+    super(props);
     this.state = {
       selectedIndex: 0
-    }
-    this.updateIndex = this.updateIndex.bind(this)
+    };
+    this.updateIndex = this.updateIndex.bind(this);
     this.exerciseCount = 0;
     this.startTimer = this.startTimer.bind(this);
   }
