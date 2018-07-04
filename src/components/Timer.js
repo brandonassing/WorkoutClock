@@ -20,17 +20,25 @@ const mapDispatchToProps = dispatch => {
 class Timer extends Component {
   constructor(props) {
     super(props);
+    this.tick = this.tick.bind(this);
+    this.state = {
+      timer: null
+    }
   }
 
   componentDidMount() {
-    setInterval( function() {
-       this.props.tick({
-         type : 'TIMER_TICK'
-       })
-    }, 1000 );
+    this.setState({
+      timer: setInterval(this.tick, 1000)
+    });
   }
 
+  componentWillUnmount() {
+    clearInterval(this.state.timer);
+  }
 
+  tick() {
+    this.props.tick();
+  }
 
   render() {
     return (
@@ -43,4 +51,4 @@ class Timer extends Component {
   }
 }
 
-export default connect (mapStateToProps, mapDispatchToProps)(Timer)
+export default connect(mapStateToProps, mapDispatchToProps)(Timer)
