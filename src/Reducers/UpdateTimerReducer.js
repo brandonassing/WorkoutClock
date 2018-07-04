@@ -1,17 +1,22 @@
-import { TIMER_TICK, TIMER_STOP } from '../Actions/CountTime';
+import { TIMER_TICK, TIMER_STOP, TIMER_RESET } from '../Actions/CountTime';
 const initialState = {
-  count: 0
+  seconds: 60
 };
 
 export const UpdateTimerReducer = (state = initialState, action) => {
   switch(action.type) {
     case TIMER_TICK:
+      if(state.seconds > 0) {
+        return {
+          seconds: state.seconds - 1
+        };
+      }
       return {
-        count: state.count + 1
+        seconds: 0
       };
-    case TIMER_STOP:
+    case TIMER_RESET:
       return {
-        count: 0
+        seconds: action.seconds
       };
     default: return state;
   }

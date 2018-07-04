@@ -1,6 +1,5 @@
-export const TIMER_START = "TIMER_START";
 export const TIMER_TICK = "TIMER_TICK";
-export const TIMER_STOP = "TIMER_STOP";
+export const TIMER_RESET = "TIMER_RESET";
 
 /*let timer = null;
 
@@ -15,7 +14,7 @@ export const tick = () => ({
   type: TIMER_TICK
 });
 
-export const stopTimer = (timer) => {
-  clearInterval(timer);
-  return { type: TIMER_STOP };
-};
+export const resetTimer = (seconds) => ({
+  seconds: seconds,
+  type: TIMER_RESET
+});
