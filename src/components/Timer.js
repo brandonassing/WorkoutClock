@@ -40,10 +40,9 @@ class Timer extends Component {
     this.props.resetTimer(0);
   }
 
-  //TODO maybe don't count to 0 bc it adds an extra second
   tick() {
-    //If time still left
-    if (this.props.secondsLeft <= 0) {
+    //If time still left; set to reset at 1 so it doesn't add an extra second
+    if (this.props.secondsLeft <= 1) {
       this.setState({
         currentTimeslot: this.state.currentTimeslot + 1
       }, function () {

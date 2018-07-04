@@ -1,4 +1,4 @@
-import { TIMER_TICK, TIMER_STOP, TIMER_RESET } from '../Actions/CountTime';
+import { TIMER_TICK, TIMER_RESET } from '../Actions/CountTime';
 const initialState = {
   seconds: 60
 };
