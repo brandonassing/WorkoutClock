@@ -1,5 +1,6 @@
 export const TIMER_TICK = "TIMER_TICK";
 export const TIMER_RESET = "TIMER_RESET";
+export const TIMER_STOP = "TIMER_STOP";
 export const INCREMENT_TIMESLOT = "INCREMENT_TIMESLOT";
 
 /*let timer = null;
@@ -19,6 +20,13 @@ export const resetTimer = (seconds) => ({
   seconds: seconds,
   type: TIMER_RESET
 });
+
+export const stopTimer = (timer) => {
+  clearInterval(timer);
+  return {
+    type: TIMER_STOP
+  }
+};
 
 export const incrementTimeslot = () => ({
   type: INCREMENT_TIMESLOT

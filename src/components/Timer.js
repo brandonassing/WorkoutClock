@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { View, Text, StyleSheet } from 'react-native';
-import { tick, resetTimer, incrementTimeslot } from '../Actions/CountTime';
+import { tick, resetTimer, stopTimer, incrementTimeslot } from '../Actions/CountTime';
 
 const mapStateToProps = state => {
   return {
@@ -17,6 +17,7 @@ const mapDispatchToProps = dispatch => {
   return {
     tick: () => dispatch(tick()),
     resetTimer: (seconds) => dispatch(resetTimer(seconds)),
+    stopTimer: (timer) => dispatch(stopTimer(timer)),
     incrementTimeslot: () => dispatch(incrementTimeslot())
   };
 };
@@ -31,33 +32,31 @@ class Timer extends Component {
   }
 
   componentDidMount() {
-    this.props.resetTimer(this.props.timeslots[this.props.currentTimeslot].seconds);
+    this.props.resetTimer(this.props.timeslots[this.props.currentTimeslot - 1].seconds);
     this.setState({
       timer: setInterval(this.tick, 1000)
     });
   }
 
   componentWillUnmount() {
-    clearInterval(this.state.timer);
-    this.props.resetTimer(0);
+    this.props.stopTimer(this.state.timer);
   }
 
   tick() {
-    //If time out; set to reset at 1 so it doesn't add an extra second
-    if (this.props.secondsLeft <= 1) {
-        this.props.incrementTimeslot();
-        //If not last timeslot
-        if (this.props.currentTimeslot < this.props.timeslots.length) {
-          this.props.resetTimer(this.props.timeslots[this.props.currentTimeslot].seconds);
-        }
-        else {
-          clearInterval(this.state.timer);
-          this.props.resetTimer(0);
-        }
-    }
-
-    else {
+    //If time not out; set to reset at 1 so it doesn't add an extra second
+    if (this.props.secondsLeft > 1) {
       this.props.tick();
+    }
+    else {
+      //If not last timeslot
+      if (this.props.currentTimeslot < this.props.timeslots.length) {
+        this.props.incrementTimeslot();
+        this.props.resetTimer(this.props.timeslots[this.props.currentTimeslot - 1].seconds);
+      }
+      else {
+        clearInterval(this.state.timer);
+        this.props.resetTimer(0);
+      }
     }
   }
 
