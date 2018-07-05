@@ -66,6 +66,7 @@ class ExerciseField extends Component {
       console.log("render field");
       //BUG fix NaN error when deleting all chars from input field. Maybe change num to 0 if no input
       //TODO prevent user from entering <= 0 for seconds
+      //TODO add max input for seconds and name
       return (
         <View style={styles.container}>
           <TextInput

@@ -36,6 +36,7 @@ class WorkoutHeader extends Component {
       };
       //BUG fix NaN error when set num is not a number
       //TODO prevent user from entering <= 0 for set num
+      //TODO add max input for sets and name
       this.props.editWorkout({
         workoutName: this.state.workoutName,
         sets: parseInt(this.state.sets)

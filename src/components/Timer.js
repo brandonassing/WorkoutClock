@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { View, StyleSheet } from 'react-native';
-import { Text } from 'react-native-elements';
+import { Text, Button } from 'react-native-elements';
 import { tick, resetTimer, stopTimer, incrementTimeslot, incrementSet } from '../Actions/CountTime';
+import WorkoutInfo from './WorkoutInfo';
 
 const mapStateToProps = state => {
   return {
@@ -35,7 +36,7 @@ const styles = {
     fontWeight: 'bold'
   },
   timeslotName: {
-    fontSize: 70
+    fontSize: 50
   }
 };
 
@@ -43,8 +44,10 @@ class Timer extends Component {
   constructor(props) {
     super(props);
     this.tick = this.tick.bind(this);
+    this.handlePress = this.handlePress.bind(this);
     this.state = {
-      timer: null
+      timer: null,
+      isPaused: false
     }
   }
 
@@ -83,15 +86,39 @@ class Timer extends Component {
     }
   }
 
+  handlePress() {
+    if (this.state.isPaused) {
+      this.setState({
+        timer: setInterval(this.tick, 1000)
+      });
+    }
+    else {
+      clearInterval(this.state.timer);
+    }
+    this.setState({
+      isPaused: !this.state.isPaused
+    });
+  }
+
+//TODO use flow text and center align
   render() {
     return (
-      <View style={styles.container}>
-        <Text h1 style={styles.seconds}>
-          {this.props.secondsLeft > 0 ? this.props.secondsLeft : "Done" }
-        </Text>
-        <Text h3 style={styles.timeslotName}>
-          {this.props.timeslots[this.props.currentTimeslot - 1].name}
-        </Text>
+      <View>
+        <View style={styles.container}>
+          <Text h1 style={styles.seconds}>
+            {this.props.secondsLeft > 0 ? this.props.secondsLeft : "Done" }
+          </Text>
+          <Text h3 style={styles.timeslotName}>
+            {this.props.timeslots[this.props.currentTimeslot - 1].name}
+          </Text>
+        </View>
+        <WorkoutInfo />
+        <Button
+          disabled={this.props.secondsLeft <= 0}
+          title={this.state.isPaused ? "Resume" : "Pause"}
+          color="black"
+          onPress={this.handlePress}
+        />
       </View>
     )
   }

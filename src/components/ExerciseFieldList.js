@@ -33,7 +33,6 @@ class ExerciseFieldList extends Component {
     };
     this.updateIndex = this.updateIndex.bind(this);
     this.exerciseCount = 0;
-    this.startTimer = this.startTimer.bind(this);
   }
 
   updateIndex(selectedIndex){
@@ -62,10 +61,6 @@ class ExerciseFieldList extends Component {
       name: "Rest",
       id: "_" + Math.random().toString(36).substr(2, 9)
     });
-  }
-
-  startTimer(){
-
   }
 
   renderExercises(){
@@ -98,7 +93,6 @@ class ExerciseFieldList extends Component {
         <Button
           disabled={!Array.isArray(this.props.timeslots) || !this.props.timeslots.length}
           buttonStyle={[styles.startButton]}
-          onPress={this.startTimer}
           title="Start"
           color="white"
           onPress={() => this.props.navigation.navigate('Timer', { title: "Timer" })}
