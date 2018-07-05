@@ -33,10 +33,11 @@ const styles = {
   },
   seconds: {
     fontSize: 125,
-    fontWeight: 'bold'
+    fontWeight: "bold"
   },
   timeslotName: {
-    fontSize: 50
+    fontSize: 50,
+    textAlign: "center"
   }
 };
 
