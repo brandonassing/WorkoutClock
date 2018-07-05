@@ -24,12 +24,13 @@ class WorkoutInfo extends Component {
         <Text>
         {this.props.timeslots[this.props.currentTimeslot - 1].name}
         </Text>
-        <Text>
-        {this.props.currentTimeslot < this.props.timeslots.length ? this.props.timeslots[this.props.currentTimeslot].name : "DONE" }
-        </Text>
-        <Text>
-        {this.props.currentTimeslot < this.props.timeslots.length ? this.props.timeslots[this.props.currentTimeslot].seconds : "NONE"}
-        </Text>
+        {
+          this.props.currentTimeslot < this.props.timeslots.length ? (
+            <Text>{this.props.timeslots[this.props.currentTimeslot].name} - {this.props.timeslots[this.props.currentTimeslot].seconds}</Text>
+          ) : (
+            <Text>DONE - NONE</Text>
+          )
+        }
         <Text>
         {(this.props.currentTimeslot) + "/" + this.props.timeslots.length}
         </Text>
