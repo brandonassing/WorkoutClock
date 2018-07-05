@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, StyleSheet } from 'react-native';
+import { Text } from 'react-native-elements';
 
 const mapStateToProps = state => {
   return {
@@ -11,26 +12,37 @@ const mapStateToProps = state => {
   };
 };
 
+const styles = {
+  container: {
+    display: "flex",
+    padding: 15,
+    marginTop: 50,
+    marginBottom: 20
+  }
+};
+
 class WorkoutInfo extends Component {
   constructor(props) {
     super(props);
   }
   render() {
     return (
-      <View>
-        <Text>
-        {this.props.currentSet + "/" + this.props.sets}
+      <View style={styles.container}>
+        <Text h4>
+          Timeslot: {(this.props.currentTimeslot) + "/" + this.props.timeslots.length}
+        </Text>
+        <Text h4>
+          Set: {this.props.currentSet + "/" + this.props.sets}
         </Text>
         {
           this.props.currentTimeslot < this.props.timeslots.length ? (
-            <Text>{this.props.timeslots[this.props.currentTimeslot].name} - {this.props.timeslots[this.props.currentTimeslot].seconds}</Text>
+            <Text h4>
+              Next: {this.props.timeslots[this.props.currentTimeslot].name} for {this.props.timeslots[this.props.currentTimeslot].seconds} seconds
+            </Text>
           ) : (
-            <Text>Last timeslot</Text>
+            <Text h4>This is the last activity in the set</Text>
           )
         }
-        <Text>
-        {(this.props.currentTimeslot) + "/" + this.props.timeslots.length}
-        </Text>
       </View>
     )
   }
