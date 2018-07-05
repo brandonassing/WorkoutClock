@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, StyleSheet } from 'react-native';
+import { Text } from 'react-native-elements';
 import { tick, resetTimer, stopTimer, incrementTimeslot, incrementSet } from '../Actions/CountTime';
 
 const mapStateToProps = state => {
@@ -21,6 +22,21 @@ const mapDispatchToProps = dispatch => {
     incrementTimeslot: () => dispatch(incrementTimeslot()),
     incrementSet: () => dispatch(incrementSet())
   };
+};
+
+const styles = {
+  container: {
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center"
+  },
+  seconds: {
+    fontSize: 125,
+    fontWeight: 'bold'
+  },
+  timeslotName: {
+    fontSize: 70
+  }
 };
 
 class Timer extends Component {
@@ -69,9 +85,12 @@ class Timer extends Component {
 
   render() {
     return (
-      <View>
-        <Text>
+      <View style={styles.container}>
+        <Text h1 style={styles.seconds}>
           {this.props.secondsLeft > 0 ? this.props.secondsLeft : "Done" }
+        </Text>
+        <Text h3 style={styles.timeslotName}>
+          {this.props.timeslots[this.props.currentTimeslot - 1].name}
         </Text>
       </View>
     )

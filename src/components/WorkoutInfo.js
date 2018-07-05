@@ -21,9 +21,6 @@ class WorkoutInfo extends Component {
         <Text>
         {this.props.currentSet + "/" + this.props.sets}
         </Text>
-        <Text>
-        {this.props.timeslots[this.props.currentTimeslot - 1].name}
-        </Text>
         {
           this.props.currentTimeslot < this.props.timeslots.length ? (
             <Text>{this.props.timeslots[this.props.currentTimeslot].name} - {this.props.timeslots[this.props.currentTimeslot].seconds}</Text>
