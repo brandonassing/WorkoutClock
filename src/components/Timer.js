@@ -71,7 +71,7 @@ class Timer extends Component {
     return (
       <View>
         <Text>
-          {this.props.secondsLeft}
+          {this.props.secondsLeft > 0 ? this.props.secondsLeft : "Done" }
         </Text>
       </View>
     )

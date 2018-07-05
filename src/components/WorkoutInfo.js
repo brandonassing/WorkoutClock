@@ -28,7 +28,7 @@ class WorkoutInfo extends Component {
           this.props.currentTimeslot < this.props.timeslots.length ? (
             <Text>{this.props.timeslots[this.props.currentTimeslot].name} - {this.props.timeslots[this.props.currentTimeslot].seconds}</Text>
           ) : (
-            <Text>DONE - NONE</Text>
+            <Text>Last exercise</Text>
           )
         }
         <Text>
