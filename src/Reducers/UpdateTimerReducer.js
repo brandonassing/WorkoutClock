@@ -1,4 +1,4 @@
-import { TIMER_TICK, TIMER_RESET, TIMER_STOP, INCREMENT_TIMESLOT } from '../Actions/CountTime';
+import { TIMER_TICK, TIMER_RESET, TIMER_STOP, INCREMENT_TIMESLOT, INCREMENT_SET } from '../Actions/CountTime';
 const initialState = {
   seconds: 60,
   currentTimeslot: 1,
@@ -34,6 +34,12 @@ export const UpdateTimerReducer = (state = initialState, action) => {
       return {
         ...state,
         currentTimeslot: state.currentTimeslot + 1
+      }
+    case INCREMENT_SET:
+      return {
+        ...state,
+        currentTimeslot: 1,
+        currentSet: state.currentSet + 1
       }
     default: return state;
   }

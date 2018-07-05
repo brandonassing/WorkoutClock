@@ -2,6 +2,7 @@ export const TIMER_TICK = "TIMER_TICK";
 export const TIMER_RESET = "TIMER_RESET";
 export const TIMER_STOP = "TIMER_STOP";
 export const INCREMENT_TIMESLOT = "INCREMENT_TIMESLOT";
+export const INCREMENT_SET = "INCREMENT_SET";
 
 /*let timer = null;
 
@@ -30,4 +31,8 @@ export const stopTimer = (timer) => {
 
 export const incrementTimeslot = () => ({
   type: INCREMENT_TIMESLOT
+});
+
+export const incrementSet = () => ({
+  type: INCREMENT_SET
 });

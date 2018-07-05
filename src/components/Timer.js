@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { View, Text, StyleSheet } from 'react-native';
-import { tick, resetTimer, stopTimer, incrementTimeslot } from '../Actions/CountTime';
+import { tick, resetTimer, stopTimer, incrementTimeslot, incrementSet } from '../Actions/CountTime';
 
 const mapStateToProps = state => {
   return {
@@ -18,7 +18,8 @@ const mapDispatchToProps = dispatch => {
     tick: () => dispatch(tick()),
     resetTimer: (seconds) => dispatch(resetTimer(seconds)),
     stopTimer: (timer) => dispatch(stopTimer(timer)),
-    incrementTimeslot: () => dispatch(incrementTimeslot())
+    incrementTimeslot: () => dispatch(incrementTimeslot()),
+    incrementSet: () => dispatch(incrementSet())
   };
 };
 
@@ -54,8 +55,14 @@ class Timer extends Component {
         this.props.resetTimer(this.props.timeslots[this.props.currentTimeslot - 1].seconds);
       }
       else {
-        clearInterval(this.state.timer);
-        this.props.resetTimer(0);
+        if (this.props.currentSet < this.props.sets) {
+          this.props.incrementSet();
+          this.props.resetTimer(this.props.timeslots[this.props.currentTimeslot - 1].seconds);
+        }
+        else {
+          clearInterval(this.state.timer);
+          this.props.resetTimer(0);
+        }
       }
     }
   }
