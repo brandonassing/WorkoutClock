@@ -5,33 +5,34 @@ import { View, Text, StyleSheet } from 'react-native';
 const mapStateToProps = state => {
   return {
     timeslots: state.updateWorkout.workout.timeslots,
-    sets: state.updateWorkout.workout.sets
+    sets: state.updateWorkout.workout.sets,
+    currentTimeslot: state.updateTimer.currentTimeslot,
+    currentSet: state.updateTimer.currentSet
   };
 };
 
 class WorkoutInfo extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      timeslotCount: 0,
-      setCount: 0
-    }
   }
-
+  //BUG goes out of bounds when no more timeslots; this is due to Timer.js incrementing timeslot and then checking if no more timeslots
   render() {
     return (
       <View>
         <Text>
-        {this.state.setCount + "/" + this.props.sets}
+        {this.props.currentSet + "/" + this.props.sets}
         </Text>
         <Text>
-        {this.props.timeslots[this.state.timeslotCount].name}
+        {this.props.timeslots[this.props.currentTimeslot].name}
         </Text>
         <Text>
-        {this.props.timeslots[this.state.timeslotCount].seconds}
+        {this.props.timeslots[this.props.currentTimeslot + 1].name}
         </Text>
         <Text>
-        {(this.state.timeslotCount + 1) + "/" + this.props.timeslots.length}
+        {this.props.timeslots[this.props.currentTimeslot + 1].seconds}
+        </Text>
+        <Text>
+        {(this.props.currentTimeslot + 1) + "/" + this.props.timeslots.length}
         </Text>
       </View>
     )

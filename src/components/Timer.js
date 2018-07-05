@@ -1,20 +1,23 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { View, Text, StyleSheet } from 'react-native';
-import { tick, resetTimer } from '../Actions/CountTime';
+import { tick, resetTimer, incrementTimeslot } from '../Actions/CountTime';
 
 const mapStateToProps = state => {
   return {
     timeslots: state.updateWorkout.workout.timeslots,
     sets: state.updateWorkout.workout.sets,
-    secondsLeft: state.updateTimer.seconds
+    secondsLeft: state.updateTimer.seconds,
+    currentTimeslot: state.updateTimer.currentTimeslot,
+    currentSet: state.updateTimer.currentSet
   };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
     tick: () => dispatch(tick()),
-    resetTimer: (seconds) => dispatch(resetTimer(seconds))
+    resetTimer: (seconds) => dispatch(resetTimer(seconds)),
+    incrementTimeslot: () => dispatch(incrementTimeslot())
   };
 };
 
@@ -23,13 +26,12 @@ class Timer extends Component {
     super(props);
     this.tick = this.tick.bind(this);
     this.state = {
-      timer: null,
-      currentTimeslot: 0
+      timer: null
     }
   }
 
   componentDidMount() {
-    this.props.resetTimer(this.props.timeslots[this.state.currentTimeslot].seconds);
+    this.props.resetTimer(this.props.timeslots[this.props.currentTimeslot].seconds);
     this.setState({
       timer: setInterval(this.tick, 1000)
     });
@@ -41,21 +43,19 @@ class Timer extends Component {
   }
 
   tick() {
-    //If time still left; set to reset at 1 so it doesn't add an extra second
+    //If time out; set to reset at 1 so it doesn't add an extra second
     if (this.props.secondsLeft <= 1) {
-      this.setState({
-        currentTimeslot: this.state.currentTimeslot + 1
-      }, function () {
+        this.props.incrementTimeslot();
         //If not last timeslot
-        if (this.state.currentTimeslot < this.props.timeslots.length) {
-          this.props.resetTimer(this.props.timeslots[this.state.currentTimeslot].seconds);
+        if (this.props.currentTimeslot < this.props.timeslots.length) {
+          this.props.resetTimer(this.props.timeslots[this.props.currentTimeslot].seconds);
         }
         else {
           clearInterval(this.state.timer);
           this.props.resetTimer(0);
         }
-      });
     }
+
     else {
       this.props.tick();
     }
