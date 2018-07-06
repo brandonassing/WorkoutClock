@@ -34,18 +34,22 @@ class WorkoutHeader extends Component {
         workoutName: "Workout 1",
         sets: "1"
       };
-      //BUG fix NaN error when set num is not a number
-      //TODO prevent user from entering <= 0 for set num
+      //TODO prevent user from entering <= 0 
       //TODO add max input for sets and name
+      //TODO change value to 1 if invalid
       this.props.editWorkout({
         workoutName: this.state.workoutName,
         sets: parseInt(this.state.sets)
       });
     }
     componentDidUpdate() {
+      let setsVal = 1;
+      if (this.state.sets > 0 && this.state.sets != "" && this.state.sets != undefined && this.state.sets != null) {
+        setsVal = parseInt(this.state.sets);
+      }
       this.props.editWorkout({
         workoutName: this.state.workoutName,
-        sets: parseInt(this.state.sets)
+        sets: setsVal
       });
     }
     render() {

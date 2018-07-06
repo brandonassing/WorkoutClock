@@ -8,7 +8,7 @@ import {
 } from 'react-native';
 
 export default class FloatingLabelInput extends Component {
-  state = {
+  /*state = {
     isFocused: false,
   };
 
@@ -58,5 +58,5 @@ export default class FloatingLabelInput extends Component {
         />
       </View>
     );
-  }
+  }*/
 }

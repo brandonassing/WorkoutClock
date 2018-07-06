@@ -40,7 +40,7 @@ class ExerciseField extends Component {
     }
 
     updateInfo(value, type){
-      if (type=="name") {
+      if (type == "name") {
         this.props.editTimeslot({
           seconds: this.props.seconds,
           type: this.props.type,
@@ -48,9 +48,13 @@ class ExerciseField extends Component {
           id: this.props.id
         });
       }
-      else if (type=="seconds") {
+      else if (type == "seconds") {
+        let secondsVal = 0;
+        if (value > 0 && value != "" && value != undefined && value != null) {
+          secondsVal = parseInt(value);
+        }
         this.props.editTimeslot({
-          seconds: parseInt(value),
+          seconds: secondsVal,
           type: this.props.type,
           name: this.props.name,
           id: this.props.id
@@ -64,9 +68,8 @@ class ExerciseField extends Component {
 
     render() {
       console.log("render field");
-      //BUG fix NaN error when deleting all chars from input field. Maybe change num to 0 if no input
-      //TODO prevent user from entering <= 0 for seconds
       //TODO add max input for seconds and name
+      //TODO prevent blank name
       return (
         <View style={styles.container}>
           <TextInput
